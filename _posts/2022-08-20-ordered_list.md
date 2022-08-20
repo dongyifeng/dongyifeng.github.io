@@ -1,10 +1,15 @@
 
 
 ---
+
 layout: post
+
 title: 有序表
+
 description: 有序表的概述
+
 tag: 算法,数据结构,有序表,AVL树,红黑树,Size Balanced Tree,跳表
+
 ---
 
 
