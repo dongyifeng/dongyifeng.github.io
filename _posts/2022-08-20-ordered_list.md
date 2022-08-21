@@ -1,7 +1,9 @@
-
 ---
 layout: post
+title: 有序表
+typora-root-url: ../../dongyifeng.github.io
 ---
+
 
 - AVL 树
 - 红黑树
