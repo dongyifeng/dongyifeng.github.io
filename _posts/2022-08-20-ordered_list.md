@@ -4,7 +4,7 @@ title: 有序表
 typora-root-url: ../../dongyifeng.github.io
 ---
 
-[TOC]
+
 
 # 概述
 

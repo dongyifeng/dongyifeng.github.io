@@ -6,7 +6,7 @@ typora-root-url: ../../dongyifeng.github.io
 
 
 
-[TOC]
+
 
 # 问题
 
