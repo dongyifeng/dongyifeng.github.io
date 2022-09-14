@@ -926,3 +926,97 @@ print(skipList.floor(60))
 
 ![](/images/assets/screenshot-20220825-184750.png)
 
+
+
+```java
+public static class Job {
+        // 工作报酬
+        public int money;
+        // 工作难度
+        public int hard;
+
+        public Job(int hard, int money) {
+            this.money = money;
+            this.hard = hard;
+        }
+    }
+
+    public static class JobComparator implements Comparator<Job> {
+        @Override
+        public int compare(Job o1, Job o2) {
+            return o1.hard != o2.hard ? o1.hard - o2.hard : o2.money - o1.money;
+        }
+    }
+
+    public static int[] getMoneys(Job[] jobs, int[] ability) {
+        Arrays.sort(jobs, new JobComparator());
+        TreeMap<Integer, Integer> treeMap = new TreeMap<>();
+
+        int money = 0;
+        for (Job job : jobs) {
+            if (treeMap.containsKey(job.hard) || job.money <= money) {
+                continue;
+            }
+            money = Math.max(money, job.money);
+            treeMap.put(job.hard, job.money);
+        }
+
+        int[] res = new int[ability.length];
+
+        for (int i = 0; i < ability.length; i++) {
+            int item = ability[i];
+            Map.Entry<Integer, Integer> entry = treeMap.floorEntry(item);
+            if (entry == null) {
+                continue;
+            }
+            res[i] = entry.getValue();
+        }
+        return res;
+    }
+
+    public static int[] getMoneys2(Job[] jobs, int[] ability) {
+        Arrays.sort(jobs, new JobComparator());
+        TreeMap<Integer, Integer> treeMap = new TreeMap<>();
+
+      	// 由于已经排序，hard 相同并且 money 大的一定排在第一名，只需要将第一名插入 treeMap 中
+      	// 需要 pre 记录每组的第一个 job，即可区分不同的组
+      	// 时间复杂度从 O(N log N) 下降到 O(N)
+        Job pre = jobs[0];
+        for (int i = 1; i < jobs.length; i++) {
+            if (jobs[i].hard != pre.hard && jobs[i].money > pre.money) {
+                treeMap.put(jobs[i].hard, jobs[i].money);
+                pre = jobs[i];
+            }
+        }
+
+        int[] res = new int[ability.length];
+
+        for (int i = 0; i < ability.length; i++) {
+            int item = ability[i];
+            Map.Entry<Integer, Integer> entry = treeMap.floorEntry(item);
+            if (entry == null) {
+                continue;
+            }
+            res[i] = entry.getValue();
+        }
+        return res;
+    }
+
+    public static void main(String[] args) {
+        Job[] jobs = new Job[8];
+        jobs[0] = new Job(3, 5);
+        jobs[1] = new Job(2, 7);
+        jobs[2] = new Job(9, 100);
+        jobs[3] = new Job(1, 4);
+        jobs[4] = new Job(2, 6);
+        jobs[5] = new Job(3, 3);
+        jobs[6] = new Job(1, 1);
+        jobs[7] = new Job(2, 8);
+        int[] ability = new int[]{0, 2, 8, 9, 10};
+        
+        for (int item : getMoneys(jobs, ability)) {
+            System.out.println(item);
+        }
+    }
+```
+
