@@ -104,9 +104,16 @@ print(expression_compute("14-95+62/50"))
 
 在计算括号内公式时：遇到 ”(“ 时，递归调用，再遇到 “)” 在进行计算，每次调用 que 中只存储当前括号内的公式。
 
+f(string , index) ：从 string 中的 index 位置开始计算，直到遇到 “)” 停止
+
+返回值：
+
+- num：计算结果
+- Index：后续继续计算的位置
+
 ![](/images/assets/screenshot-20221015-090401.png)
 
-
+<font color=red>**总结：只要是优先级结合问题，可以套用这种套路**</font>
 
 ```python
 def expression_compute(string):
