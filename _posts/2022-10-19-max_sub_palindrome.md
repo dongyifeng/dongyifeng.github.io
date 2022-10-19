@@ -1,6 +1,6 @@
 ---
 title: 最长回文子序列
-tags: 每日一题,动态规划
+tags: 每日一题
 typora-root-url: ../../dongyifeng.github.io
 ---
 
@@ -125,37 +125,37 @@ def max_sub_palindrome3(string):
 
 
 
+```python
 def max_sub_palindrome4(string):
     if not string: return ""
     n = len(string)
     dp = [[0] * n for _ in range(n)]
 
-```python
-# base case
-for i in range(n):
-    dp[i][i] = 1
+    # base case
+    for i in range(n):
+        dp[i][i] = 1
 
-for i in range(n - 2, -1, -1):
-    for j in range(i + 1, n):
-        if string[i] == string[j]:
-            dp[i][j] = dp[i + 1][j - 1] + 2
+    for i in range(n - 2, -1, -1):
+        for j in range(i + 1, n):
+            if string[i] == string[j]:
+                dp[i][j] = dp[i + 1][j - 1] + 2
+            else:
+                dp[i][j] = max(dp[i + 1][j], dp[i][j - 1])
+
+    count = row = 0
+    col = n - 1
+    res_len = index = dp[row][col]
+    res = [None] * index
+    while count < res_len:
+        if row < n - 1 and dp[row][col] == dp[row + 1][col]:
+            row += 1
+        elif col > 0 and dp[row][col] == dp[row][col - 1]:
+            col -= 1
         else:
-            dp[i][j] = max(dp[i + 1][j], dp[i][j - 1])
-
-count = row = 0
-col = n - 1
-res_len = index = dp[row][col]
-res = [None] * index
-while count < res_len:
-    if row < n - 1 and dp[row][col] == dp[row + 1][col]:
-        row += 1
-    elif col > 0 and dp[row][col] == dp[row][col - 1]:
-        col -= 1
-    else:
-        index -= 1
-        res[res_len - index - 1] = res[index] = string[row]
-        count += 2
-        row += 1
-        col -= 1
-return res
+            index -= 1
+            res[res_len - index - 1] = res[index] = string[row]
+            count += 2
+            row += 1
+            col -= 1
+    return res
 ```

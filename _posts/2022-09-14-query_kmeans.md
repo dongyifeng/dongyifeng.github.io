@@ -1,6 +1,6 @@
 ---
 title: Query Kmeans
-tags: kmeans
+tags: 机器学习
 typora-root-url: ../../dongyifeng.github.io
 ---
 
@@ -1014,5 +1014,4 @@ print("Over")
 
 
  跟打新相关的操作![](/images/assets/20201112164251.jpg)
-
 

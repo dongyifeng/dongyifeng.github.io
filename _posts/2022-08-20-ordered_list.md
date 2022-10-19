@@ -1,6 +1,7 @@
 ---
 layout: post
 title: 有序表
+tags: 数据结构
 typora-root-url: ../../dongyifeng.github.io
 ---
 
