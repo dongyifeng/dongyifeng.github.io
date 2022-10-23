@@ -1,6 +1,6 @@
 ---
 title: 回文串移除方案
-tags: 每日一题
+tags: 每日一题 动态规划
 typora-root-url: ../../dongyifeng.github.io
 ---
 
