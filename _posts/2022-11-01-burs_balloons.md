@@ -137,3 +137,29 @@ def max_score2(arr):
     return dp[1][len(arr) - 2]
 ```
 
+
+
+**对数器：**
+
+```python
+import random
+
+def generator_random_arr(max_size, max_value):
+    return [item for item in
+            set([int(random.random() * max_value) + 1 for _ in range(int(random.random() * max_size) + 1)])]
+
+def check():
+    global map
+    max_size = 5
+    max_value = 10
+    for _ in range(10000):
+        arr = generator_random_arr(max_size, max_value)
+        # print("info2", aim, arr)
+        res = max_score(arr[:])
+        res2 = max_score2(arr[:])
+        # print("Info", "res=", res, "res2=", res2, aim, arr)
+        if res != res2 or res != res2:
+            print("ERROR", "res=", res, "res2=", res2, arr)
+    print("OVER")
+```
+
