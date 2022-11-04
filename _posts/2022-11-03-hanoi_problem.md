@@ -14,7 +14,7 @@ typora-root-url: ../../dongyifeng.github.io
 2. 将 n 号圆盘从 from 柱子移动到 to 柱子。
 3. 将 0 ~ n - 1 号圆盘从 other 柱子移动到 to 柱子。
 
-![](/../typora/images/algorithm/screenshot-20221104-124442.png)
+![](/images/assets/screenshot-20221104-124442.png)
 
 ![](/images/assets/screenshot-20221104-124514.png)
 
