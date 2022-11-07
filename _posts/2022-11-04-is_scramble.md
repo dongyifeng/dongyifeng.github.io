@@ -127,7 +127,7 @@ def f(str1, str2, l1, l2, k):
 
 base case 是 k ==1 时，$dp[1][l_1][l_2] = str1[l_1] == str2[l_2]$
 
-![](/images/assets/screenshot-20221105-002545.png)
+![](/images/assets/screenshot-20221107-094511.png)
 
 ```python
 def is_scramble2(str1, str2):
