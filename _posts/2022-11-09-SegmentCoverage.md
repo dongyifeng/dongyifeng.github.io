@@ -1,5 +1,5 @@
 ---
-title: 线段重合
+title: 线段重叠个数
 tags: 每日一题 图形图
 typora-root-url: ../../dongyifeng.github.io
 ---
@@ -23,7 +23,7 @@ typora-root-url: ../../dongyifeng.github.io
 空间复杂度：$O(N)$
 
 ```java
-    public static int maxLevelCount1(int[][] arr) {
+    public static int segmentCoverMax(int[][] arr) {
         if (arr == null || arr.length == 0) {
             return 0;
         }
