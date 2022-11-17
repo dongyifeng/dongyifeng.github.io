@@ -70,6 +70,35 @@ def inorder(node, first, second):
 
 
 
+也可以这样写，使用一个全局变量 pre 记录中序遍历上次的结点
+
+```python
+global pre
+pre = None
+
+def find_error_node(root: TreeNode):
+    global pre
+    pre = None
+    err = [None, None]
+    inorder3(root, err)
+    return err
+
+def inorder3(node, err):
+    global pre
+    if node:
+        inorder3(node.left, err)
+        if pre and pre.val > node.val:
+            err[1] = node
+            if not err[0]: err[0] = pre
+
+        pre = node
+        inorder3(node.right, err)
+```
+
+
+
+
+
 **解法二：非递归**
 
 ```python
