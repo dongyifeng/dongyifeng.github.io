@@ -1,20 +1,16 @@
 ---
-title: Query Kmeans
+title: Query 聚类
 tags: 机器学习
 typora-root-url: ../../dongyifeng.github.io
 ---
 
+# 背景
+
+搜索系统优化长尾 query。想了解一下长尾 query 长什么样？大体上都有几类？最好能归类，一类一类处理。
+
+Query 数据源：包含“什么”，“怎么”，“如何” 关键词的 Query。
 
 
-
-
-# 问题
-
-​		搜索系统优化长尾 query。想了解一下长尾 query，长什么样？大体上都有几类？最好能归类，一类一类处理。
-
-
-
-​		包含“什么”，“怎么”，“如何” 关键词的 Query。
 
 ![](/images/assets/20201111172139.jpg)
 
@@ -50,13 +46,13 @@ typora-root-url: ../../dongyifeng.github.io
 
 
 
-聚类：将数据划分到不同的类里，使相似（距离相近）的数据在同一类里，不相似（距离较远）的数据在不同的类里。
+聚类：**将数据划分到不同的类里，使相似（距离相近）的数据在同一类里，不相似（距离较远）的数据在不同的类里。**
 
 ![](/images/assets/20200924203328.jpg)
 
-## demo
+## Demo
 
-1. 生成模拟数据
+生成模拟数据
 
 ```python
 from sklearn.datasets import make_blobs
@@ -75,13 +71,13 @@ X = [[-6.92324165e+00 -1.06695320e+01]
 
 
 
-
+模拟的数据的分布：
 
 ![](/images/assets/20200927112416.jpg)
 
 
 
-1. 聚类及可视化
+聚类及可视化代码（使用 sklearn 库中的 KMeans）：
 
 ```python
 from sklearn.datasets import make_blobs
@@ -108,6 +104,10 @@ plt.scatter(centroid[:,0], centroid[:,1], marker='x', s=15, c="black")
 plt.show()
 ```
 
+
+
+聚类的结果：不同颜色表示不同类型
+
 ![](/images/assets/20200927113349.jpg)
 
 
@@ -124,7 +124,9 @@ $dist(X,Y) = \sqrt{\sum_{i=1}^n{(x_i-y_i)^2}}$
 
 ![](/images/assets/20200924195812.jpg)
 
-## K-Means 算法描述
+## K-Means 算法
+
+## 算法描述
 
 **算法描述**
 
@@ -141,9 +143,9 @@ $dist(x,y)=\sqrt{{(x_1-x_2)^2+(y_1-y_2)^2}}$
 
 例如：绿色类中点：$A:[x_1,y_1] \,, B:[x_2,y_2]\,,C:[x_3,y_3]\,,D:[x_4,y_4]$
 
-跟新绿色质心：$[\frac{x_1+x_2+x_3+x_4}{4},\frac{y_1+y_2+y_3+y_4}{4}]$
+更新绿色质心：$[\frac{x_1+x_2+x_3+x_4}{4},\frac{y_1+y_2+y_3+y_4}{4}]$
 
-<font color=red>**注意：此时的质心是虚拟的点（不是训练集中的样本）**</font>
+<font color=green>**注意：此时的质心是虚拟的点（不是训练集中的样本，后续优化点）**</font>
 
 ![](/images/assets/20200924200846.jpg)
 
@@ -153,7 +155,7 @@ $dist(x,y)=\sqrt{{(x_1-x_2)^2+(y_1-y_2)^2}}$
 
 ![](/images/assets/20200924200914.jpg)
 
-关键点：
+**关键点：**
 
 - 计算样本数据与中心点的距离
 
@@ -167,7 +169,9 @@ $dist(x,y)=\sqrt{{(x_1-x_2)^2+(y_1-y_2)^2}}$
 
   $L(C) = \sum_{k \in K}\sum_{i \in k}||x_i-c_k||^2$
 
-代码：
+
+
+Kmeans 聚类代码（自己实现方便后根据业务需求优化聚类过程）：
 
 ```python
 import math
@@ -256,19 +260,37 @@ plt.scatter(centroid[:, 0], centroid[:, 1], marker='x', s=15, c="black")
 plt.show()
 ```
 
+
+
+聚类的结果：不同颜色表示不同类型
+
 ![](/images/assets/20200928102339.jpg)
 
-## 局部最优
 
-![](/images/assets/20200927140507.jpg)
 
-![](/images/assets/20200927140447.jpg)
+### K-Means 缺点
+
+1. K 的选择需要事先预定：K值的选取不好把握。（改进：ISODATA 算法）
+2. K 个初始质心的位置选择对聚类结果和运行时间都有很大影响。（改进：k-means++）
+3. 采用迭代方法，得到的结果只是局部最优。
+
+如下图：红色圆圈是初始质心的位置，由于初始质心的位置不同，最终聚类的结果也不同。
+
+
+
+
+
+<img src="images/assets/20200927140507.jpg" height=200/>
+
+<img src="images/assets/20200927140447.jpg" height=200/>
+
+
 
 ## K-Means++
 
 由于初始质心对分类结果及收敛速度影响甚大，所以K-Means ++ 对初始质心进行优化。
 
-==**<font color='red'>核心思想：初始质心相互距离尽可能的远。</font>**==
+==**<font color='green'>核心思想：初始质心相互距离尽可能的远。</font>**==
 
 ![](/images/assets/20200928102339.jpg)
 
@@ -283,7 +305,7 @@ plt.show()
 
 
 
-<font color=red>效果：网上有人使用真实和合成的数据集测试了他们的方法，速度通常提高了 2 倍，对于某些数据集，误差提高了近 1000 倍。</font>
+<font color=green>效果：网上有人使用真实和合成的数据集测试了他们的方法，速度通常提高了 2 倍，对于某些数据集，误差提高了近 1000 倍。</font>
 
 
 
@@ -506,9 +528,11 @@ K-Means 和 K-Means++ 质心个数 K 是固定不变的。ISODATA 算法通过�
 
 ![](/images/assets/20201112093313.jpg)
 
-$dist(X,Y) = \sqrt{\sum_{i=1}^n{(x_i-y_i)^2}}$
+
 
 要计算 query 与 query 的欧式距离，需要将 query 表达成高维空间中一个点。通过 One Hot Encoding。
+
+$dist(X,Y) = \sqrt{\sum_{i=1}^n{(x_i-y_i)^2}}$
 
 
 
@@ -593,15 +617,27 @@ nohup word2vec -train train_data_file_name -output vec_model_file_name -size 100
 
 有了 word 与 word 之间相似度，怎么计算 query 与 query 的相似度？
 
-第一版：选择词相关性最大分值，求和。
+
+
+**第一版：选择词相关性最大分值，求和。**
+
+如下图：query1 = "如何买美股" 和 query2= “怎么投资港股”。
+
+1. 分词：对 query1 分词后得到 ["如何"，“买”，“美股”]，query2 分词后得到 ["怎么"，“投资”，“港股”]。
+2. 计算词与词的相似度：使用 word2vec 分别计算 “如何” 与  ["怎么"，“投资”，“港股”] 的相似度，选取最大值作为 "如何" 对应的分值 s1。
+3. 计算 query 与 query 的相似度：s = s1 + s2 + s3
+
+
 
 ![](/images/assets/20201112143038.jpg)
 
 
 
-第二版：添加词性约束
+**第二版：添加词性约束**
 
-问题：[买 , 港股] 相关性最大。预期是：[买 , 投资] 的分值
+如下图所示，在第一版方案中：原本预期：（“如何”，“怎么”）、（“买”，“投资”）、（“美股”，“港股”）之间相似度最大，但实际上（“买”，“港股”）的相似度最大。“买港股” 确实在训练 word2vec 的语料中经常出现。为了达到预期的目标，我们添加了词性约束。
+
+
 
 ![](/images/assets/20201112143631.jpg)
 
@@ -609,11 +645,24 @@ nohup word2vec -train train_data_file_name -output vec_model_file_name -size 100
 
 新增词性约束
 
+如下图：query 分完词后，都带有词性。计算词与词的相似度时，方案一中是将 query1 中的一个单词与 query2 中所有单词都计算相似度。本方案优化为：将 query1 中的一个单词只与 query2 中词性相同的单词计算相似度（如果有多个取最大值那个）。例如：query1 中 “如何” 只与 query2 中的 “怎么” 计算相似度。
+
+
+
 ![](/images/assets/20201112144308.jpg)
 
 
 
-第三版：扩展核心词，动宾结构，句式结构，有股票名称新增：xx_stock
+**第三版：扩展核心词，动宾结构，句式结构**，有股票名称新增：xx_stock
+
+为了提高相似 query 与 query 之间的相似度分值，新增了一些特征：
+
+1. query 的核心词
+2. 动宾结构：query 一般很短，如果query1 和 query2 中都有动宾结构，那么动宾结构大概率是用户搜索意图，是非常重要的特征。
+3. query 所有词的词性：为了将相似的句式的 query 聚合在一起。
+4. query 中的股票：query 中股票也是用户强烈的搜索意图。
+
+
 
 ![](/images/assets/87.jpg)
 
@@ -706,6 +755,10 @@ KMeans 核心步骤：
 跟新绿色质心：$[\frac{x_1+x_2+x_3+x_4}{4},\frac{y_1+y_2+y_3+y_4}{4}]$
 
 <font color=red>**注意：此时的质心是虚拟的点（不是训练集中的样本）**</font>
+
+
+
+![](/images/assets/20200924200846.jpg)
 
 
 
@@ -995,23 +1048,25 @@ print("Over")
 
 ## 聚类结果
 
-股票的某一个指标怎么看
+
+
+**类一：股票的某一个指标怎么看**
 
 ![](/images/assets/20201112163852.jpg)
 
 
 
-最近行情为什么涨（跌）
+**类二：最近行情为什么涨（跌）**
 
 ![](/images/assets/20201112164041.jpg)
 
 
 
-某一只股票为什么涨(跌)
+**类三：某一只股票为什么涨(跌)**
 
 ![](/images/assets/20201112164143.jpg)
 
 
 
- 跟打新相关的操作![](/images/assets/20201112164251.jpg)
+**类四：跟打新相关的操作**![](/images/assets/20201112164251.jpg)
 
