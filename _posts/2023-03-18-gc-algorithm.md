@@ -284,7 +284,7 @@ MAT 是 Memory Analyzer 的简称，它是一款功能强大的 Java 堆内存�
 
 
 
-<img src="/../typora/images/java/WX20221229-145359@2x.png" style="zoom:50%;" />
+<img src="/images/java/WX20221229-145359@2x.png" style="zoom:50%;" />
 
 
 
@@ -499,7 +499,7 @@ MAT 是 Memory Analyzer 的简称，它是一款功能强大的 Java 堆内存�
 
 分代算法按照对象的生命周期长短划分成两个部分，分区算法将这个堆空间划分成连续的不同小区间（region）。每个小区间都是独立使用，独立回收。这种算法的好处是<font color=green>可以控制一次回收多少个小区间。</font>
 
-<img src="/../typora/images/java/WX20230101-130019@2x.png" style="zoom:33%;" />
+<img src="/images/java/WX20230101-130019@2x.png" style="zoom:33%;" />
 
 
 
