@@ -8,7 +8,7 @@ copyright: true
 categories: 
 - 搜索
 tags:
-- 搜索
+- es
 typora-root-url: ../../dongyifeng.github.io
 index_img: /images/index_img/pipeline.jpg
 ---
