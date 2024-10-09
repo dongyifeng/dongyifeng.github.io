@@ -1,8 +1,10 @@
 ---
-typora-root-url: ../../../typora
+title: OpenFeign
+tags: OpenFeign
+typora-root-url: ../../dongyifeng.github.io
 ---
 
-[TOC]
+
 
 # 概述
 
