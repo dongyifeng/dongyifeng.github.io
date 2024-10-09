@@ -6,8 +6,6 @@ typora-root-url: ../../dongyifeng.github.io
 
 
 
-[TOC]
-
 垃圾回收主要在：堆区和方法区
 
 <img src="/images/java/WX20221228-144714@2x.png" style="zoom:50%;" />
