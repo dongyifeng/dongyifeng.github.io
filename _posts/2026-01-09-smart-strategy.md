@@ -13,8 +13,6 @@ typora-root-url: ../../dongyifeng.github.io
 
 
 
-[TOC]
-
 # 广告系统中的在线策略引擎设计
 
 ​	在广告投放平台（ADX）的核心链路中，<font color=blut>**流量精细化管控**</font>是保障广告请求稳定性、提升资源利用率的关键环节。本文将围绕 ADX 系统中 <font color=tomato size=4.5>**`adx-smart-strategy` **</font>模块的设计思路展开，结合新增的「SDK/API 流量混合控制策略」，详解基于策略模式的广告流量动态管控方案。
